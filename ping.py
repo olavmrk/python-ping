@@ -5,7 +5,7 @@ import socket
 import struct
 import time
 
-class Target(object):
+class Target:
 
     def __init__(self, target):
         self.name = target
@@ -20,7 +20,7 @@ class Target(object):
     def __str__(self):
         return '{name} [{address}]'.format(name=self.name, address=self.address[0])
 
-class IcmpEcho(object):
+class IcmpEcho:
 
     def __init__(self, type=8, code=0, checksum=0, identifier=0, sequence_number=0, payload=b''):
         self.type = type
@@ -69,13 +69,13 @@ class IcmpEcho(object):
         return ret
 
     def __repr__(self):
-        return 'IcmpEcho(type={type}, code={code}, checksum={checksum}, identifier={identifier}, sequence_number={sequence_number}, payload={payload})'.format(
+        return 'IcmpEcho(type={type}, code={code}, checksum={checksum}, identifier={identifier}, sequence_number={sequence_number}, payload={payload!r})'.format(
             type=self.type,
             code=self.code,
             checksum=self.checksum,
             identifier=self.identifier,
             sequence_number=self.sequence_number,
-            payload=repr(self.payload)
+            payload=self.payload
             )
 
 def ping(target, timeout=5.0):
